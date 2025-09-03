@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tiendaonline
+    ports:
+      - "3306:3306"
+    volumes:
+      - /e/Master/TFM/volumenes/mysql:/var/lib/mysql
+    networks:
+      - springnet
+
+  spring-app:
+    build: ./tiendaonline
+    container_name: spring-container
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tiendaonline?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - springnet
+
+  frontend:
+    build:
+      context: ./tienda-frontend
+    container_name: react-container
+    ports:
+      - "4200:80"
+    depends_on:
+      - spring-app
+    networks:
+      - springnet
+
+  api-ubuntu:
+    build: ./ApiUbuntuFiles
+    container_name: api-ubuntu-container
+    ports:
+      - "5000:8000"
+    volumes:
+      - E:/Master/TFM/volumenes/imagenes:/app/uploads   # volumen absoluto del host
+    networks:
+      - springnet
+
+networks:
+  springnet:
+    driver: bridge
