@@ -1,69 +1,77 @@
 import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "../styles/Home.css";
 
 function Home() {
   return (
     <div className="home-container">
-      {/* Header */}
-      <header className="header">
-        <div className="logo">FisioStore</div>
-        <nav>
-          <ul className="nav-links">
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/nosotros">Nosotros</a></li>
-            <li><a href="/servicios">Servicios</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
 
-      {/* Hero */}
-      <section className="hero">
-        <div className="hero-text">
-          <h1>Recupera tu bienestar</h1>
+      <main className="home">
+        {/* Hero */}
+        <section className="hero">
+          <h2>Bienvenido a nuestra tienda de fisioterapia</h2>
           <p>
-            Somos especialistas en fisioterapia y rehabilitación. Nuestro
-            compromiso es tu salud, movilidad y calidad de vida.
+            Productos especializados para mejorar tu bienestar, recuperarte de lesiones y potenciar tu rendimiento físico.
           </p>
-        </div>
-      </section>
+        </section>
 
-      {/* Beneficios */}
-      <section className="beneficios">
-        <h2>¿Por qué elegirnos?</h2>
-        <div className="beneficios-grid">
-          <div className="beneficio">
-            <img src="https://via.placeholder.com/200" alt="Profesionales" />
-            <h3>Profesionales expertos</h3>
-            <p>Equipo formado en las últimas técnicas de fisioterapia.</p>
+        {/* Beneficios */}
+        <section className="features">
+          <h3>Beneficios de nuestros productos</h3>
+          <div className="feature-cards">
+            <div className="card">
+              <h4>Recuperación rápida</h4>
+              <p>Ayuda a tu cuerpo a recuperarse de lesiones de forma efectiva.</p>
+            </div>
+            <div className="card">
+              <h4>Bienestar diario</h4>
+              <p>Mejora tu comodidad y movilidad cada día con productos ergonómicos.</p>
+            </div>
+            <div className="card">
+              <h4>Rendimiento físico</h4>
+              <p>Optimiza tu entrenamiento y potencia tu fuerza y resistencia.</p>
+            </div>
           </div>
-          <div className="beneficio">
-            <img src="https://via.placeholder.com/200" alt="Calidad" />
-            <h3>Calidad garantizada</h3>
-            <p>Materiales y servicios diseñados para tu recuperación.</p>
-          </div>
-          <div className="beneficio">
-            <img src="https://via.placeholder.com/200" alt="Confianza" />
-            <h3>Atención personalizada</h3>
-            <p>Cuidamos de cada paciente con un plan adaptado a sus necesidades.</p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Sobre nosotros */}
-      <section className="sobre-nosotros">
-        <h2>Sobre nosotros</h2>
-        <p>
-          En FisioStore nos apasiona ayudarte a recuperar tu movilidad y
-          bienestar. Nuestra misión es ofrecerte soluciones prácticas,
-          accesibles y seguras en el mundo de la fisioterapia y la rehabilitación.
-        </p>
-      </section>
+        {/* Cómo funciona */}
+        <section className="how-it-works">
+          <h3>Cómo Funciona</h3>
+          <p>
+            Explora nuestros productos, selecciona el que mejor se adapte a tus necesidades y comienza a mejorar tu bienestar de manera sencilla y efectiva.
+          </p>
+        </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2025 FisioStore | Salud y bienestar en movimiento</p>
-      </footer>
+        {/* Testimonios */}
+        <section className="testimonials">
+          <h3>Lo que dicen nuestros clientes</h3>
+          <div className="testimonial-cards">
+            <div className="testimonial">
+              <p>"Productos de gran calidad, me ayudaron mucho en mi recuperación."</p>
+              <span>- Ana P.</span>
+            </div>
+            <div className="testimonial">
+              <p>"Muy recomendables, cómodos y fáciles de usar."</p>
+              <span>- Carlos M.</span>
+            </div>
+            <div className="testimonial">
+              <p>"Mi rendimiento físico ha mejorado gracias a estos productos."</p>
+              <span>- Laura G.</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="cta">
+          <h3>Descubre todos nuestros productos</h3>
+          <p>Visita nuestra tienda y encuentra todo lo que necesitas para tu bienestar físico.</p>
+          <a href="/productos" className="cta-button">Ver Productos</a>
+        </section>
+      </main>
+
+      <Footer />
     </div>
   );
 }
