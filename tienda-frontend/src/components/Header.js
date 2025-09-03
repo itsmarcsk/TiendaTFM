@@ -16,8 +16,8 @@ function Header() {
           <li><a href="/">Inicio</a></li>
           <li><a href="/productos">Productos</a></li>
           <li><a href="/contacto">Contacto</a></li>
-          <li><a href="/carrito"><FaShoppingCart size={18}/> Carrito</a></li>
-          <li><a href="/usuario"><FaUser size={18}/> Usuario</a></li>
+          <li><a href="/carrito"><FaShoppingCart size={18}/></a></li>
+          <li><a href="/usuario"><FaUser size={18}/></a></li>
         </ul>
       </nav>
 
