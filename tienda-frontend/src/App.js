@@ -2,13 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Contacto from "./pages/Contacto";
-/*import Productos from "./pages/Productos";
-import Carrito from "./pages/Carrito";
-import Usuario from "./pages/Usuario";
-import "./styles/App.css";
-<Route path="/productos" element={<Productos />} />
-<Route path="/carrito" element={<Carrito />} />
-<Route path="/usuario" element={<Usuario />} />*/
+import Login from "./pages/Login";
+import Registro from "./pages/Registro";
+import Productos from "./pages/Productos";
 
 function App() {
   return (
@@ -21,6 +17,13 @@ function App() {
         {/* Otras páginas */}
         
         <Route path="/contacto" element={<Contacto />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/registro" element={<Registro />} />
+
+        {/* Ruta para productos */}
+        <Route path="/productos" element={<Productos />} />
         
       </Routes>
 

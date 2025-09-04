@@ -22,8 +22,7 @@ public class UsuarioDAO {
 
     public void insertar(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuario (nombre, apellidos, email, contrasena, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, usuario.getNombre());
             stmt.setString(2, usuario.getApellidos());
@@ -37,8 +36,7 @@ public class UsuarioDAO {
 
     public Usuario obtenerPorId(int id) throws SQLException {
         String sql = "SELECT * FROM usuario WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -60,35 +58,32 @@ public class UsuarioDAO {
     }
 
     public Usuario obtenerPorEmail(String email) throws SQLException {
-    String sql = "SELECT * FROM usuario WHERE email = ?";
-    try (Connection conn = dataSource.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = "SELECT * FROM usuario WHERE email = ?";
+        try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
 
-        if (rs.next()) {
-            return new Usuario(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("apellidos"),
-                    rs.getString("email"),
-                    rs.getString("contrasena"),
-                    rs.getString("direccion"),
-                    rs.getString("telefono"),
-                    rs.getTimestamp("fecha_registro")
-            );
+            if (rs.next()) {
+                return new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("email"),
+                        rs.getString("contrasena"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getTimestamp("fecha_registro")
+                );
+            }
         }
+        return null; // Si no se encuentra ningún usuario con ese correo
     }
-    return null; // Si no se encuentra ningún usuario con ese correo
-}
 
     public List<Usuario> obtenerTodos() throws SQLException {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuario";
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = dataSource.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 lista.add(new Usuario(
@@ -108,8 +103,7 @@ public class UsuarioDAO {
 
     public void eliminar(int id) throws SQLException {
         String sql = "DELETE FROM usuario WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }
@@ -117,8 +111,7 @@ public class UsuarioDAO {
 
     public void actualizar(Usuario usuario) throws SQLException {
         String sql = "UPDATE usuario SET nombre = ?, apellidos = ?, email = ?, contrasena = ?, direccion = ?, telefono = ? WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
