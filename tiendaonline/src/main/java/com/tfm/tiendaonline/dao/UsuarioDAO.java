@@ -59,6 +59,30 @@ public class UsuarioDAO {
         return null;
     }
 
+    public Usuario obtenerPorEmail(String email) throws SQLException {
+    String sql = "SELECT * FROM usuario WHERE email = ?";
+    try (Connection conn = dataSource.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return new Usuario(
+                    rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("apellidos"),
+                    rs.getString("email"),
+                    rs.getString("contrasena"),
+                    rs.getString("direccion"),
+                    rs.getString("telefono"),
+                    rs.getTimestamp("fecha_registro")
+            );
+        }
+    }
+    return null; // Si no se encuentra ningún usuario con ese correo
+}
+
     public List<Usuario> obtenerTodos() throws SQLException {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuario";

@@ -1,12 +1,20 @@
 package com.tfm.tiendaonline.controller;
 
-import com.tfm.tiendaonline.model.Usuario;
-import com.tfm.tiendaonline.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tfm.tiendaonline.model.Usuario;
+import com.tfm.tiendaonline.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -33,9 +41,20 @@ public class UsuarioController {
 
     // Obtener usuario por ID
     @GetMapping("/{id}")
-    public Usuario obtenerUsuario(@PathVariable int id) {
+    public Usuario obtenerUsuarioPorId(@PathVariable int id) {
         try {
             return usuarioService.obtenerUsuarioPorId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Obtener usuario por email
+    @GetMapping("/email/{email}")
+    public Usuario obtenerUsuarioPorEmail(@PathVariable String email) {
+        try {
+            return usuarioService.obtenerUsuarioPorEmail(email);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

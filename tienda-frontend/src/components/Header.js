@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="logo">🧘‍♂️ Tienda Fisioterapia</div>
+      <div className="logo"><a href="/">🧘‍♂️</a> Tienda Fisioterapia</div>
 
       <nav className={`nav ${menuOpen ? "nav-active" : ""}`}>
         <ul className="nav-links">

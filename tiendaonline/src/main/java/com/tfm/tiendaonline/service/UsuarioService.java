@@ -22,6 +22,10 @@ public class UsuarioService {
         return usuarioDAO.obtenerPorId(id);
     }
 
+    public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
+        return usuarioDAO.obtenerPorEmail(email);
+    }
+    
     public List<Usuario> listarUsuarios() throws SQLException {
         return usuarioDAO.obtenerTodos();
     }
