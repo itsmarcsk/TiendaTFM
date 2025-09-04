@@ -5,6 +5,9 @@ import Contacto from "./pages/Contacto";
 import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import Productos from "./pages/Productos";
+import Usuario from "./pages/Usuario";
+import Pedidos from "./pages/Pedidos";
+
 
 function App() {
   return (
@@ -24,6 +27,11 @@ function App() {
 
         {/* Ruta para productos */}
         <Route path="/productos" element={<Productos />} />
+
+        {/* Ruta para pedidos */}
+        <Route path="/pedidos" element={<Pedidos />} />
+
+        <Route path="/usuario" element={<Usuario />} />
         
       </Routes>
 

@@ -23,9 +23,10 @@ function Header() {
 
       <nav className={`nav ${menuOpen ? "nav-active" : ""}`}>
         <ul className="nav-links">
-          <li><a href="/">Inicio</a></li>
+          <li><a href="/">Inicio</a></li>    
           <li><a href="/productos">Productos</a></li>
           <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/pedidos">Pedidos</a></li>
           <li>
             <a href="/carrito">
               <FaShoppingCart size={18} />
@@ -33,7 +34,7 @@ function Header() {
           </li>
           <li>
             {email ? (
-              <a href="/perfil">
+              <a href="/usuario">
                 <FaUser size={18} />
               </a>
             ) : (
