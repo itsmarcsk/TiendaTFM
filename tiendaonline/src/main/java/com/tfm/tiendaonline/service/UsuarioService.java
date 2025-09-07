@@ -28,7 +28,7 @@ public class UsuarioService {
     public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
         return usuarioDAO.obtenerPorEmail(email);
     }
-    
+
     public List<Usuario> listarUsuarios() throws SQLException {
         return usuarioDAO.obtenerTodos();
     }
@@ -40,4 +40,9 @@ public class UsuarioService {
     public void eliminarUsuario(int id) throws SQLException {
         usuarioDAO.eliminar(id);
     }
+
+    public boolean login(String email, String contrasena) throws SQLException {
+        return usuarioDAO.login(email, contrasena);
+    }
+
 }

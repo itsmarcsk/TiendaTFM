@@ -30,7 +30,7 @@ function Registro() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/usuarios", {
+      const response = await fetch("http://localhost:8080/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -129,6 +129,10 @@ function Registro() {
         </form>
 
         {status && <p className="status">{status}</p>}
+
+        <p className="register-link">
+          <a href="/login">Iniciar sesión</a>
+        </p>
       </main>
 
       <Footer />

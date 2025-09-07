@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /e/Master/TFM/volumenes/mysql:/var/lib/mysql
+      - /c/Master/TFM/volumenes/mysql:/var/lib/mysql
     networks:
       - springnet
 
@@ -45,7 +45,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - E:/Master/TFM/volumenes/imagenes:/app/uploads   # volumen absoluto del host
+      - C:/Master/TFM/volumenes/imagenes:/app/uploads   # volumen absoluto del host
     networks:
       - springnet
 

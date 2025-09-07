@@ -1,7 +1,9 @@
 package com.tfm.tiendaonline.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,6 +61,16 @@ public class UsuarioController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @GetMapping("/login/{email}/{contrasena}")
+    public Map<String, Object> login(@PathVariable String email,
+                                     @PathVariable String contrasena) throws SQLException {
+        Map<String, Object> response = new HashMap<>();
+        boolean ok = usuarioService.login(email, contrasena);
+
+        response.put("success", ok);
+        return response;
     }
 
     // Listar todos los usuarios

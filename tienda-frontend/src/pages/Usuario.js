@@ -11,7 +11,7 @@ function Usuario() {
   useEffect(() => {
     const email = localStorage.getItem("email");
     if (email) {
-      fetch(`http://localhost:8080/api/usuarios/email/${email}`)
+      fetch(`http://localhost:8080/usuarios/email/${email}`)
         .then((res) => {
           if (!res.ok) throw new Error("Usuario no encontrado");
           return res.json();

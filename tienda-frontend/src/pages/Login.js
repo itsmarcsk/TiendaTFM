@@ -5,10 +5,7 @@ import Footer from "../components/Footer";
 import "../styles/Login.css";
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
@@ -19,20 +16,18 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:8080/api/usuarios/email/${formData.email}`);
-      if (res.ok) {
-        const usuario = await res.json();
+      // Cambiado de "tiendaapi-container" a "localhost" para que funcione desde el navegador
+      const res = await fetch(
+        `http://localhost:8080/usuarios/login/${encodeURIComponent(formData.email)}/${encodeURIComponent(formData.password)}`
+      );
 
-        if (usuario && usuario.contrasena === formData.password) {
-          // ✅ Login correcto
-          localStorage.setItem("email", usuario.email);
-          setStatus("Inicio de sesión exitoso.");
-          window.location.href = "/"; // redirige al home
-        } else {
-          setStatus("Contraseña incorrecta.");
-        }
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("email", formData.email);
+        setStatus("Inicio de sesión exitoso.");
+        window.location.href = "/"; // redirige al home
       } else {
-        setStatus("Usuario no encontrado.");
+        setStatus("Email o contraseña incorrectos.");
       }
     } catch (error) {
       console.error("Error en login:", error);

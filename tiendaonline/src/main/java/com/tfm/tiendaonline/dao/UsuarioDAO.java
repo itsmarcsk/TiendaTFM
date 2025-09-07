@@ -34,6 +34,18 @@ public class UsuarioDAO {
         }
     }
 
+    public boolean login(String email, String contrasena) throws SQLException {
+        String sql = "SELECT 1 FROM usuario WHERE email = ? AND contrasena = ?";
+        try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            stmt.setString(2, contrasena);
+
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // true si existe, false si no
+        }
+    }
+
     public Usuario obtenerPorId(int id) throws SQLException {
         String sql = "SELECT * FROM usuario WHERE id = ?";
         try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
