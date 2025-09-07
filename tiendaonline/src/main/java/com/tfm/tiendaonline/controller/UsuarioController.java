@@ -31,13 +31,13 @@ public class UsuarioController {
 
     // Crear usuario
     @PostMapping
-    public String crearUsuario(@RequestBody Usuario usuario) {
+    public boolean crearUsuario(@RequestBody Usuario usuario) {
         try {
             usuarioService.registrarUsuario(usuario);
-            return "Usuario creado correctamente";
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Error al crear usuario: " + e.getMessage();
+            return false;
         }
     }
 

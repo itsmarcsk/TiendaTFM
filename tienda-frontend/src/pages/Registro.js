@@ -1,3 +1,4 @@
+// src/pages/Registro.js
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -23,7 +24,7 @@ function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Comprobar contraseñas iguales
+    // Validación de contraseñas
     if (formData.contrasena !== formData.confirmarContrasena) {
       setStatus("Las contraseñas no coinciden.");
       return;
@@ -43,7 +44,10 @@ function Registro() {
         }),
       });
 
-      if (response.ok) {
+      // El endpoint devuelve un booleano directamente
+      const success = await response.json();
+
+      if (success) {
         setStatus("Registro exitoso. Ya puedes iniciar sesión.");
         setFormData({
           nombre: "",
@@ -54,6 +58,8 @@ function Registro() {
           direccion: "",
           telefono: "",
         });
+        localStorage.setItem("email", formData.email);
+        window.location.href = "/";
       } else {
         setStatus("Error al registrar usuario.");
       }
@@ -131,7 +137,7 @@ function Registro() {
         {status && <p className="status">{status}</p>}
 
         <p className="register-link">
-          <a href="/login">Iniciar sesión</a>
+          ¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a>
         </p>
       </main>
 

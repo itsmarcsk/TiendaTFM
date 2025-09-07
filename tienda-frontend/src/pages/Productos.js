@@ -1,3 +1,4 @@
+// src/pages/Productos.js
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -26,6 +27,12 @@ function Productos() {
     fetchProductos();
   }, []);
 
+  // Construye la URL completa de la imagen
+  const getImagenUrl = (imagen) => {
+    if (!imagen) return "/default-product.png";
+    return `http://localhost:8080/media/imagenes/${imagen}`;
+  };
+
   return (
     <div className="productos-container">
       <Header />
@@ -40,13 +47,13 @@ function Productos() {
           {productos.map((producto) => (
             <div key={producto.id} className="producto-card">
               <img
-                src={producto.imagenUrl || "/default-product.png"}
+                src={getImagenUrl(producto.imagen)}
                 alt={producto.nombre}
               />
               <h3>{producto.nombre}</h3>
               <p>{producto.descripcion}</p>
               <span className="precio">{producto.precio} €</span>
-              <button>Añadir al carrito</button>
+              <button className="btn-carrito">Añadir al carrito</button>
             </div>
           ))}
         </div>
