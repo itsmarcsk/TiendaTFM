@@ -1,11 +1,10 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8.0
     container_name: mysql-container
     restart: always
     environment:
+      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tiendaonline
     ports:
@@ -15,9 +14,9 @@ services:
     networks:
       - springnet
 
-  spring-app:
+  tienda-app:
     build: ./tiendaonline
-    container_name: spring-container
+    container_name: tiendaapi-container
     depends_on:
       - mysql
     ports:
@@ -29,22 +28,22 @@ services:
     networks:
       - springnet
 
-  frontend:
+  tienda-frontend:
     build:
       context: ./tienda-frontend
-    container_name: react-container
+    container_name: tienda-container
     ports:
-      - "4200:80"
+      - "4300:80"
     depends_on:
-      - spring-app
+      - tienda-app
     networks:
       - springnet
 
-  api-ubuntu:
+  api-images-ubuntu:
     build: ./ApiUbuntuFiles
     container_name: api-ubuntu-container
     ports:
-      - "5000:8000"
+      - "5000:5000"
     volumes:
       - E:/Master/TFM/volumenes/imagenes:/app/uploads   # volumen absoluto del host
     networks:

@@ -3,27 +3,29 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-# Copiamos package.json y package-lock.json para instalar dependencias
+# Instala deps con caché fiable
 COPY package*.json ./
+RUN npm ci --no-audit --no-fund
 
-RUN npm install
-
-# Copiamos el resto del código y construimos el proyecto
+# Copia código y build
 COPY . .
-
 RUN npm run build
 
-# Stage 2: serve with nginx
+# Stage 2: nginx
 FROM nginx:alpine
 
-# Copiamos los archivos de build al directorio de Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Limpia HTML de Nginx
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copiamos configuración personalizada de Nginx si tienes (opcional)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Config SPA: reenvía rutas a index.html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponemos puerto 80
+# Copia TODO el repo del builder y luego mueve lo que exista
+COPY --from=build /app /tmp/app
+RUN if [ -d /tmp/app/build ]; then cp -r /tmp/app/build/* /usr/share/nginx/html/; \
+    elif [ -d /tmp/app/dist ]; then cp -r /tmp/app/dist/* /usr/share/nginx/html/; \
+    else echo "ERROR: No se encontró carpeta de build (ni /app/build ni /app/dist)"; exit 1; fi \
+    && rm -rf /tmp/app
+
 EXPOSE 80
-
-# Comando por defecto
 CMD ["nginx", "-g", "daemon off;"]

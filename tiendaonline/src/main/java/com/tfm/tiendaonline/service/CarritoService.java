@@ -1,11 +1,14 @@
 package com.tfm.tiendaonline.service;
 
-import com.tfm.tiendaonline.dao.CarritoDAO;
-import com.tfm.tiendaonline.model.Carrito;
-
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.tfm.tiendaonline.dao.CarritoDAO;
+import com.tfm.tiendaonline.model.Carrito;
+
+@Service
 public class CarritoService {
 
     private final CarritoDAO carritoDAO;

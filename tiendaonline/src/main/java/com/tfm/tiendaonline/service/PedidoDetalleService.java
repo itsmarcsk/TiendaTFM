@@ -1,11 +1,14 @@
 package com.tfm.tiendaonline.service;
 
-import com.tfm.tiendaonline.dao.PedidoDetalleDAO;
-import com.tfm.tiendaonline.model.PedidoDetalle;
-
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.tfm.tiendaonline.dao.PedidoDetalleDAO;
+import com.tfm.tiendaonline.model.PedidoDetalle;
+
+@Service
 public class PedidoDetalleService {
 
     private final PedidoDetalleDAO pedidoDetalleDAO;

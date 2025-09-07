@@ -132,3 +132,7 @@ async def delete_all_files():
             os.remove(path)
             deleted.append(filename)
     return {"status": True, "deleted_files": deleted}
+
+@app.get("/")
+async def index():
+    return {"message": "API de almacenamiento está en funcionamiento"}

@@ -3,9 +3,12 @@ package com.tfm.tiendaonline.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.tfm.tiendaonline.dao.UsuarioDAO;
 import com.tfm.tiendaonline.model.Usuario;
 
+@Service
 public class UsuarioService {
 
     private final UsuarioDAO usuarioDAO;
