@@ -21,8 +21,8 @@ public class CarritoService {
         carritoDAO.insertar(carrito);
     }
 
-    public List<Carrito> obtenerCarritoDeUsuario(int usuarioId) throws SQLException {
-        return carritoDAO.obtenerPorUsuario(usuarioId);
+    public List<Carrito> obtenerCarritoDeUsuario(String email) throws SQLException {
+        return carritoDAO.obtenerPorUsuario(email);
     }
 
     public void actualizarCantidad(Carrito carrito) throws SQLException {
@@ -33,7 +33,11 @@ public class CarritoService {
         carritoDAO.eliminar(id);
     }
 
-    public void vaciarCarrito(int usuarioId) throws SQLException {
-        carritoDAO.eliminarPorUsuario(usuarioId);
+    public void vaciarCarrito(String email) throws SQLException {
+        carritoDAO.eliminarPorUsuario(email);
+    }
+
+    public void vaciarCarritoPorProducto(String email, String productoNombre) throws SQLException {
+        carritoDAO.eliminarPorUsuarioPorProducto(email, productoNombre);
     }
 }

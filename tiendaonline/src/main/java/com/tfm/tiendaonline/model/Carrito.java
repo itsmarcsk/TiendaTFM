@@ -2,29 +2,29 @@ package com.tfm.tiendaonline.model;
 
 public class Carrito {
     private int id;
-    private int usuarioId;
-    private int productoId;
+    private String email;
+    private String productoNombre;
     private int cantidad;
 
     public Carrito() {}
 
-    public Carrito(int id, int usuarioId, int productoId, int cantidad) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.productoId = productoId;
+    public Carrito(int cantidad, String email, String productoNombre, int id) {
         this.cantidad = cantidad;
+        this.productoNombre = productoNombre;
+        this.id = id;
+        this.email = email;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public String getEmail() {
+        return email;
     }
 
-    public int getProductoId() {
-        return productoId;
+    public String getProductoNombre() {
+        return productoNombre;
     }
 
     public int getCantidad() {
@@ -35,12 +35,12 @@ public class Carrito {
         this.id = id;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setProductoId(int productoId) {
-        this.productoId = productoId;
+    public void setProductoNombre(String productoNombre) {
+        this.productoNombre = productoNombre;
     }
 
     public void setCantidad(int cantidad) {

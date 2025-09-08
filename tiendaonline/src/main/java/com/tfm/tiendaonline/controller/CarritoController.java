@@ -32,18 +32,16 @@ public class CarritoController {
             carritoService.agregarProducto(carrito);
             return carrito;
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException("Error al agregar producto al carrito");
         }
     }
 
     // Obtener el carrito de un usuario
-    @GetMapping("/usuario/{usuarioId}")
-    public List<Carrito> obtenerCarrito(@PathVariable int usuarioId) {
+    @GetMapping("/usuario/{email}")
+    public List<Carrito> obtenerCarrito(@PathVariable String email) {
         try {
-            return carritoService.obtenerCarritoDeUsuario(usuarioId);
+            return carritoService.obtenerCarritoDeUsuario(email);
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException("Error al obtener el carrito del usuario");
         }
     }
@@ -56,7 +54,6 @@ public class CarritoController {
             carritoService.actualizarCantidad(carrito);
             return carrito;
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException("Error al actualizar cantidad del carrito");
         }
     }
@@ -68,19 +65,28 @@ public class CarritoController {
             carritoService.eliminarProducto(id);
             return "Producto eliminado del carrito correctamente";
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException("Error al eliminar producto del carrito");
         }
     }
 
     // Vaciar el carrito de un usuario
-    @DeleteMapping("/usuario/{usuarioId}")
-    public String vaciarCarrito(@PathVariable int usuarioId) {
+    @DeleteMapping("/usuario/{email}")
+    public String vaciarCarrito(@PathVariable String email) {
         try {
-            carritoService.vaciarCarrito(usuarioId);
+            carritoService.vaciarCarrito(email);
             return "Carrito vaciado correctamente";
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error al vaciar el carrito del usuario");
+        }
+    }
+
+    // Vaciar el carrito de un usuario por producto
+    @DeleteMapping("/usuario/{email}/producto/{productoNombre}")
+    public String vaciarCarritoPorProducto(@PathVariable String email, @PathVariable String productoNombre) {
+        try {
+            carritoService.vaciarCarritoPorProducto(email, productoNombre);
+            return "Carrito vaciado correctamente";
+        } catch (SQLException e) {
             throw new RuntimeException("Error al vaciar el carrito del usuario");
         }
     }

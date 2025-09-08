@@ -36,7 +36,6 @@ public class UsuarioController {
             usuarioService.registrarUsuario(usuario);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -47,7 +46,6 @@ public class UsuarioController {
         try {
             return usuarioService.obtenerUsuarioPorId(id);
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -58,7 +56,6 @@ public class UsuarioController {
         try {
             return usuarioService.obtenerUsuarioPorEmail(email);
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -79,7 +76,6 @@ public class UsuarioController {
         try {
             return usuarioService.listarUsuarios();
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -92,7 +88,6 @@ public class UsuarioController {
             usuarioService.actualizarUsuario(usuario);
             return "Usuario actualizado correctamente";
         } catch (SQLException e) {
-            e.printStackTrace();
             return "Error al actualizar usuario: " + e.getMessage();
         }
     }
@@ -104,7 +99,6 @@ public class UsuarioController {
             usuarioService.eliminarUsuario(id);
             return "Usuario eliminado correctamente";
         } catch (SQLException e) {
-            e.printStackTrace();
             return "Error al eliminar usuario: " + e.getMessage();
         }
     }

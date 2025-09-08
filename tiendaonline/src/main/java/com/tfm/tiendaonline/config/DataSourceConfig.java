@@ -7,16 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.tfm.tiendaonline.dao.CarritoDAO;
-import com.tfm.tiendaonline.dao.PedidoDAO;
-import com.tfm.tiendaonline.dao.PedidoDetalleDAO;
 import com.tfm.tiendaonline.dao.ProductoDAO;
 import com.tfm.tiendaonline.dao.UsuarioDAO;
-
-/*import com.tfm.clinicaf.dao.CitaDao;
-import com.tfm.clinicaf.dao.FisioterapeutaDao;
-import com.tfm.clinicaf.dao.PacienteDao;
-import com.tfm.clinicaf.dao.RevisionDao;
-import com.tfm.clinicaf.dao.TratamientoDao;*/
 
 
 @Configuration
@@ -55,14 +47,6 @@ public class DataSourceConfig {
     @Bean
     public CarritoDAO carritoDAO(DataSource dataSource) {
         return new CarritoDAO(dataSource);
-    }
-    @Bean
-    public PedidoDAO pedidoDAO(DataSource dataSource) {
-        return new PedidoDAO(dataSource);
-    }
-    @Bean
-    public PedidoDetalleDAO pedidoDetalleDAO(DataSource dataSource) {
-        return new PedidoDetalleDAO(dataSource);
     }
 }
 

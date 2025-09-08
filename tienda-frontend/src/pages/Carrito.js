@@ -3,50 +3,70 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/Carrito.css";
 
+// Firebase
+import { collection, query, where, onSnapshot, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+
 function Carrito() {
   const [productos, setProductos] = useState([]);
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    const fetchCarrito = async () => {
-      try {
-        const email = localStorage.getItem("email");
-        if (!email) {
-          setStatus("Debes iniciar sesión para ver tu carrito.");
-          return;
-        }
+    const email = localStorage.getItem("email");
+    if (!email) {
+      setStatus("Debes iniciar sesión para ver tu carrito.");
+      return;
+    }
 
-        // 🔹 Obtener usuario por email
-        const userRes = await fetch(`http://localhost:8080/usuarios/email/${email}`);
-        const usuario = await userRes.json();
+    const carritoRef = collection(db, "carritos");
+    const q = query(carritoRef, where("email", "==", email));
 
-        if (!usuario) {
-          setStatus("Usuario no encontrado.");
-          return;
-        }
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const carritoData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProductos(carritoData);
+    });
 
-        // 🔹 Obtener carrito del usuario
-        const carritoRes = await fetch(`http://localhost:8080/carrito/usuario/${usuario.id}`);
-        const carritoData = await carritoRes.json();
-        setProductos(carritoData);
-      } catch (error) {
-        console.error("Error al cargar el carrito:", error);
-        setStatus("Error al cargar el carrito. Intenta de nuevo.");
-      }
-    };
-
-    fetchCarrito();
+    return () => unsubscribe();
   }, []);
 
-  const total = productos.reduce(
-    (acc, producto) => acc + producto.precio * producto.cantidad,
-    0
-  );
+  const vaciarCarrito = async () => {
+    const email = localStorage.getItem("email");
+    if (!email) return;
+
+    const carritoRef = collection(db, "carritos");
+    const q = query(carritoRef, where("email", "==", email));
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(async (docSnap) => {
+      await deleteDoc(doc(db, "carritos", docSnap.id));
+    });
+
+    setStatus("Carrito vaciado ✅");
+  };
+
+  const finalizarCompra = async () => {
+    const email = localStorage.getItem("email");
+    if (!email) return;
+
+    const carritoRef = collection(db, "carritos");
+    const q = query(carritoRef, where("email", "==", email));
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(async (docSnap) => {
+      await deleteDoc(doc(db, "carritos", docSnap.id));
+    });
+
+    setStatus("Compra finalizada ✅");
+  };
+
+  const total = productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
 
   return (
     <div className="carrito-container">
       <Header />
-
       <main className="carrito-main">
         <h2>Tu Carrito</h2>
         {status && <p className="status">{status}</p>}
@@ -56,19 +76,23 @@ function Carrito() {
           <div className="carrito-items">
             {productos.map((producto) => (
               <div key={producto.id} className="carrito-item">
-                <p className="nombre">{producto.nombre}</p>
+                <p className="nombre">{producto.productoNombre}</p>
                 <p className="cantidad">Cantidad: {producto.cantidad}</p>
                 <p className="precio">Precio: ${producto.precio.toFixed(2)}</p>
               </div>
             ))}
+
             <div className="total">
               <p>Total: ${total.toFixed(2)}</p>
             </div>
-            <button className="checkout-btn">Finalizar Compra</button>
+
+            <div className="carrito-buttons">
+              <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar Carrito</button>
+              <button className="checkout-btn" onClick={finalizarCompra}>Finalizar Compra</button>
+            </div>
           </div>
         )}
       </main>
-
       <Footer />
     </div>
   );
