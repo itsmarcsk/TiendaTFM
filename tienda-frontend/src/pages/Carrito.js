@@ -21,6 +21,7 @@ function Carrito() {
     const carritoRef = collection(db, "carritos");
     const q = query(carritoRef, where("email", "==", email));
 
+    // 🔹 Escuchar cambios en tiempo real
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const carritoData = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -78,12 +79,14 @@ function Carrito() {
               <div key={producto.id} className="carrito-item">
                 <p className="nombre">{producto.productoNombre}</p>
                 <p className="cantidad">Cantidad: {producto.cantidad}</p>
-                <p className="precio">Precio: ${producto.precio.toFixed(2)}</p>
+                <p className="precio">
+                  Precio unitario: ${producto.precio.toFixed(2)} | Total: ${(producto.precio * producto.cantidad).toFixed(2)}
+                </p>
               </div>
             ))}
 
             <div className="total">
-              <p>Total: ${total.toFixed(2)}</p>
+              <p>Total carrito: ${total.toFixed(2)}</p>
             </div>
 
             <div className="carrito-buttons">
