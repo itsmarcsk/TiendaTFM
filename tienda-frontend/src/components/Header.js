@@ -43,9 +43,16 @@ function Header() {
         </ul>
       </nav>
 
-      <div className="hamburger" onClick={toggleMenu}>
+      <button
+        className="hamburger"
+        onClick={toggleMenu}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") toggleMenu();
+        }}
+        aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+      >
         {menuOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
-      </div>
+      </button>
     </header>
   );
 }

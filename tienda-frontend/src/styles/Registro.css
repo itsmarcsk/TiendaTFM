@@ -33,6 +33,10 @@
   border-radius: 10px;
 }
 
+.registro-form input[type="password"] {
+  border: 1px solid #888;
+}
+
 .registro-form button {
   background: #388e3c;
   color: white;
@@ -49,17 +53,16 @@
   background: #2e7d32;
 }
 
+/* Unificado y mejorado */
 .status {
   margin-top: 1.5rem;
   text-align: center;
   font-size: 1.1rem;
+  font-weight: bold;
+  color: #b71c1c; /* rojo para error por defecto */
 }
 
-.registro-form input[type="password"] {
-  border: 1px solid #888;
-}
-.status {
-  margin-top: 1rem;
-  font-weight: bold;
-  color: #b71c1c; /* rojo si error */
+/* Si quieres diferenciar éxito, puedes usar .status.success */
+.status.success {
+  color: #2e7d32; /* verde para éxito */
 }

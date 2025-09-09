@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import "../styles/Productos.css";
 
 // Firebase
-import { collection, query, where, getDocs, addDoc, updateDoc, onSnapshot } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 function Productos() {
