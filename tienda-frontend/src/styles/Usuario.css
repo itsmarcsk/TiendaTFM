@@ -1,55 +1,108 @@
 /* src/styles/Usuario.css */
 
+/* Contenedor principal */
+.usuario-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f0f4f3; /* Fondo suave general */
+}
+
+/* Área principal */
 .usuario-main {
   max-width: 700px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 2.5rem;
   background-color: #e0f2f1; /* Verde suave para cajas */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
 .usuario-main h2 {
   text-align: center;
   color: #00695c; /* Verde principal */
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
+/* Texto de la info del usuario */
 .usuario-info p {
   font-size: 1.1rem;
   margin: 0.8rem 0;
   color: #004d40; /* Verde oscuro para el texto */
 }
 
+/* Botones principales */
 .usuario-info button {
   display: block;
-  margin: 2rem auto 0;
+  margin: 1rem auto 0;
   padding: 0.8rem 2rem;
   background-color: #00695c; /* Verde principal */
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .usuario-info button:hover {
   background-color: #004d40; /* Verde más oscuro al pasar el mouse */
+  transform: scale(1.03);
 }
 
+/* Botón de acción peligrosa */
+.usuario-info button.danger {
+  background-color: #e53935; /* Rojo para eliminar */
+}
+
+.usuario-info button.danger:hover {
+  background-color: #b71c1c;
+  transform: scale(1.03);
+}
+
+/* Inputs de formulario */
+.usuario-main input[type="text"],
+.usuario-main input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 2px solid #b2dfdb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.usuario-main input:focus {
+  outline: none;
+  border-color: #00695c;
+  box-shadow: 0 0 5px rgba(0, 105, 92, 0.5);
+}
+
+/* Mensajes de estado */
 .status {
   text-align: center;
-  color: red;
+  font-weight: bold;
+  color: #d32f2f; /* rojo para errores */
   margin-bottom: 1rem;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .usuario-main {
     margin: 1rem;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .usuario-info p {

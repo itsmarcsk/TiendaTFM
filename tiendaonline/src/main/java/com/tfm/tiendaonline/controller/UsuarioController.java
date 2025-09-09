@@ -62,7 +62,7 @@ public class UsuarioController {
 
     @GetMapping("/login/{email}/{contrasena}")
     public Map<String, Object> login(@PathVariable String email,
-                                     @PathVariable String contrasena) throws SQLException {
+            @PathVariable String contrasena) throws SQLException {
         Map<String, Object> response = new HashMap<>();
         boolean ok = usuarioService.login(email, contrasena);
 
@@ -81,10 +81,10 @@ public class UsuarioController {
     }
 
     // Actualizar usuario
-    @PutMapping("/{id}")
-    public String actualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+    @PutMapping("/{email}")
+    public String actualizarUsuario(@PathVariable String email, @RequestBody Usuario usuario) {
         try {
-            usuario.setId(id);
+            usuario.setEmail(email);
             usuarioService.actualizarUsuario(usuario);
             return "Usuario actualizado correctamente";
         } catch (SQLException e) {
@@ -93,13 +93,24 @@ public class UsuarioController {
     }
 
     // Eliminar usuario
-    @DeleteMapping("/{id}")
-    public String eliminarUsuario(@PathVariable int id) {
+    @DeleteMapping("/{email}")
+    public String eliminarUsuario(@PathVariable String email) {
         try {
-            usuarioService.eliminarUsuario(id);
+            usuarioService.eliminarUsuario(email);
             return "Usuario eliminado correctamente";
         } catch (SQLException e) {
             return "Error al eliminar usuario: " + e.getMessage();
         }
     }
+
+    @PutMapping("/{email}/contrasena")
+    public String actualizarContrasena(@PathVariable String email, @RequestBody String contrasena) {
+        try {
+            usuarioService.actualizarContrasena(email, contrasena);
+            return "Contraseña actualizada correctamente";
+        } catch (SQLException e) {
+            return "Error al actualizar contraseña: " + e.getMessage();
+        }
+    }
+
 }

@@ -6,7 +6,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.tfm.tiendaonline.dao.CarritoDAO;
 import com.tfm.tiendaonline.dao.ProductoDAO;
 import com.tfm.tiendaonline.dao.UsuarioDAO;
 
@@ -42,11 +41,6 @@ public class DataSourceConfig {
     @Bean
     public ProductoDAO productoDAO(DataSource dataSource) {
         return new ProductoDAO(dataSource);
-    }
-
-    @Bean
-    public CarritoDAO carritoDAO(DataSource dataSource) {
-        return new CarritoDAO(dataSource);
     }
 }
 

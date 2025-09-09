@@ -76,3 +76,41 @@
     width: 100%;
   }
 }
+
+/* 🔹 Mensaje de estado con estilo */
+.status {
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  background-color: #c8e6c9; /* Verde suave de éxito */
+  color: #256029;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-5px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* 🔹 Botón Vaciar Carrito con estilo mejorado */
+.vaciar-btn {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.8rem 2rem;
+  background-color: #c62828; /* Rojo fuerte */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.vaciar-btn:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
+}

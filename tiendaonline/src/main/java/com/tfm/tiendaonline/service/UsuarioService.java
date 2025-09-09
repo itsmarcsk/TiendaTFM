@@ -37,12 +37,16 @@ public class UsuarioService {
         usuarioDAO.actualizar(usuario);
     }
 
-    public void eliminarUsuario(int id) throws SQLException {
-        usuarioDAO.eliminar(id);
+    public void eliminarUsuario(String email) throws SQLException {
+        usuarioDAO.eliminar(email);
     }
 
     public boolean login(String email, String contrasena) throws SQLException {
         return usuarioDAO.login(email, contrasena);
+    }
+
+    public void actualizarContrasena(String email, String nuevaContrasena) throws SQLException {
+        usuarioDAO.actualizarContrasena(email, nuevaContrasena);
     }
 
 }

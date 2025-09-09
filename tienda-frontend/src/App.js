@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import Productos from "./pages/Productos";
 import Usuario from "./pages/Usuario";
+import Carrito from "./pages/Carrito";
+import CambiarContraseña from "./pages/CambiarContrasena";
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
       <Routes>
         {/* Ruta por defecto */}
         <Route path="/" element={<Home />} />
+
 
         {/* Otras páginas */}
         
@@ -28,8 +31,15 @@ function App() {
         {/* Ruta para productos */}
         <Route path="/productos" element={<Productos />} />
 
-        {/* Ruta para pedidos */}
+        {/* Ruta para usuario */}
         <Route path="/usuario" element={<Usuario />} />
+
+        {/* Ruta para carrito */}
+        <Route path="/carrito" element={<Carrito />} />
+
+        
+        {/* Ruta para cambiar contraseña */}
+        <Route path="/cambiar-contrasena" element={<CambiarContraseña />} />
         
       </Routes>
 

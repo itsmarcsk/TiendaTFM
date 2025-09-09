@@ -113,26 +113,34 @@ public class UsuarioDAO {
         return lista;
     }
 
-    public void eliminar(int id) throws SQLException {
-        String sql = "DELETE FROM usuario WHERE id = ?";
+    public void eliminar(String email) throws SQLException {
+        String sql = "DELETE FROM usuario WHERE email = ?";
         try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setString(1, email);
             stmt.executeUpdate();
         }
     }
 
     public void actualizar(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuario SET nombre = ?, apellidos = ?, email = ?, contrasena = ?, direccion = ?, telefono = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nombre = ?, apellidos = ?, contrasena = ?, direccion = ?, telefono = ? WHERE email = ?";
         try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellidos());
-            ps.setString(3, usuario.getEmail());
-            ps.setString(4, usuario.getContrasena());
-            ps.setString(5, usuario.getDireccion());
-            ps.setString(6, usuario.getTelefono());
-            ps.setInt(7, usuario.getId());
+            ps.setString(3, usuario.getContrasena());
+            ps.setString(4, usuario.getDireccion());
+            ps.setString(5, usuario.getTelefono());
+            ps.setString(6, usuario.getEmail()); // email usado solo para identificar el usuario
 
+            ps.executeUpdate();
+        }
+    }
+
+     public void actualizarContrasena(String email, String nuevaContrasena) throws SQLException {
+        String sql = "UPDATE usuario SET contrasena = ? WHERE email = ?";
+        try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nuevaContrasena);
+            ps.setString(2, email);
             ps.executeUpdate();
         }
     }

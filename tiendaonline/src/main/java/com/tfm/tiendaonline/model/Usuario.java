@@ -61,5 +61,8 @@ public class Usuario {
         this.id = id;
     }
 
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }

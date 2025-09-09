@@ -24,7 +24,7 @@ function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de contraseñas
+    // Validación final de contraseñas
     if (formData.contrasena !== formData.confirmarContrasena) {
       setStatus("Las contraseñas no coinciden.");
       return;
@@ -44,7 +44,6 @@ function Registro() {
         }),
       });
 
-      // El endpoint devuelve un booleano directamente
       const success = await response.json();
 
       if (success) {
@@ -68,6 +67,9 @@ function Registro() {
       setStatus("Error de conexión con el servidor.");
     }
   };
+
+  const contrasenasNoCoinciden =
+    formData.confirmarContrasena && formData.contrasena !== formData.confirmarContrasena;
 
   return (
     <div className="registro-container">
@@ -106,6 +108,9 @@ function Registro() {
             placeholder="Contraseña"
             value={formData.contrasena}
             onChange={handleChange}
+            style={{
+              borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb",
+            }}
             required
           />
           <input
@@ -114,8 +119,19 @@ function Registro() {
             placeholder="Repetir contraseña"
             value={formData.confirmarContrasena}
             onChange={handleChange}
+            style={{
+              borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb",
+            }}
             required
           />
+          {contrasenasNoCoinciden && (
+            <p
+              className="status"
+              style={{ color: "red", fontSize: "0.9rem", marginTop: "0.2rem" }}
+            >
+              Las contraseñas no coinciden
+            </p>
+          )}
           <input
             type="text"
             name="direccion"
@@ -131,7 +147,9 @@ function Registro() {
             onChange={handleChange}
           />
 
-          <button type="submit">Registrarse</button>
+          <button type="submit" disabled={contrasenasNoCoinciden}>
+            Registrarse
+          </button>
         </form>
 
         {status && <p className="status">{status}</p>}

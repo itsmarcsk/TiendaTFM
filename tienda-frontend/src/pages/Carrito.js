@@ -33,6 +33,14 @@ function Carrito() {
     return () => unsubscribe();
   }, []);
 
+  // 🔹 Ocultar el status automáticamente a los 4s
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => setStatus(""), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   const vaciarCarrito = async () => {
     const email = localStorage.getItem("email");
     if (!email) return;
