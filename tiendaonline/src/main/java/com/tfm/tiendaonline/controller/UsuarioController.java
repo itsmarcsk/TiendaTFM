@@ -1,11 +1,11 @@
 package com.tfm.tiendaonline.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +24,6 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @Autowired
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
@@ -37,16 +36,6 @@ public class UsuarioController {
             return true;
         } catch (SQLException e) {
             return false;
-        }
-    }
-
-    // Obtener usuario por ID
-    @GetMapping("/{id}")
-    public Usuario obtenerUsuarioPorId(@PathVariable int id) {
-        try {
-            return usuarioService.obtenerUsuarioPorId(id);
-        } catch (SQLException e) {
-            return null;
         }
     }
 
@@ -76,19 +65,7 @@ public class UsuarioController {
         try {
             return usuarioService.listarUsuarios();
         } catch (SQLException e) {
-            return null;
-        }
-    }
-
-    // Actualizar usuario
-    @PutMapping("/{email}")
-    public String actualizarUsuario(@PathVariable String email, @RequestBody Usuario usuario) {
-        try {
-            usuario.setEmail(email);
-            usuarioService.actualizarUsuario(usuario);
-            return "Usuario actualizado correctamente";
-        } catch (SQLException e) {
-            return "Error al actualizar usuario: " + e.getMessage();
+            return new ArrayList<>(); // lista vacía en lugar de null
         }
     }
 

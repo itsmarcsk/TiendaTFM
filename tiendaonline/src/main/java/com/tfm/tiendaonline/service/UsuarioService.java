@@ -21,20 +21,12 @@ public class UsuarioService {
         usuarioDAO.insertar(usuario);
     }
 
-    public Usuario obtenerUsuarioPorId(int id) throws SQLException {
-        return usuarioDAO.obtenerPorId(id);
-    }
-
     public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
         return usuarioDAO.obtenerPorEmail(email);
     }
 
     public List<Usuario> listarUsuarios() throws SQLException {
         return usuarioDAO.obtenerTodos();
-    }
-
-    public void actualizarUsuario(Usuario usuario) throws SQLException {
-        usuarioDAO.actualizar(usuario);
     }
 
     public void eliminarUsuario(String email) throws SQLException {

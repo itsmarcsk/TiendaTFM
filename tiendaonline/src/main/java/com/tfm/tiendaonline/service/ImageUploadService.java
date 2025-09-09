@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class ImageUploadService {
 
-    private final String FASTAPI_URL = "http://api-ubuntu-container:5000";
+    private static final String FASTAPI_URL = "http://api-ubuntu-container:5000";
     
     private final WebClient.Builder webClientBuilder;
     @Autowired

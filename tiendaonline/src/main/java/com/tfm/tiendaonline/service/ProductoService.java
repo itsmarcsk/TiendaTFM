@@ -23,19 +23,10 @@ public class ProductoService {
         productoDAO.insertar(producto);
     }
 
-    // Obtiene un producto por su ID
-    public Producto obtenerProductoPorId(int id) throws SQLException {
-        return productoDAO.obtenerPorId(id);
-    }
 
     // Lista todos los productos
     public List<Producto> listarProductos() throws SQLException {
         return productoDAO.obtenerTodos();
-    }
-
-    // Actualiza los datos de un producto existente
-    public void actualizarProducto(Producto producto) throws SQLException {
-        productoDAO.actualizar(producto);
     }
 
     // Elimina un producto por su ID

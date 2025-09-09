@@ -23,8 +23,7 @@ public class ProductoDAO {
     // Insertar un producto
     public void insertar(Producto producto) throws SQLException {
         String sql = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, producto.getNombre());
             ps.setString(2, producto.getDescripcion());
@@ -41,30 +40,13 @@ public class ProductoDAO {
         }
     }
 
-    // Obtener producto por ID
-    public Producto obtenerPorId(int id) throws SQLException {
-        String sql = "SELECT id, nombre, descripcion, precio, stock, imagen, fecha_creacion FROM producto WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return mapearProducto(rs);
-                }
-            }
-        }
-        return null;
-    }
 
     // Obtener todos los productos
     public List<Producto> obtenerTodos() throws SQLException {
         String sql = "SELECT id, nombre, descripcion, precio, stock, imagen, fecha_creacion FROM producto";
         List<Producto> productos = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 productos.add(mapearProducto(rs));
@@ -73,27 +55,10 @@ public class ProductoDAO {
         return productos;
     }
 
-    // Actualizar un producto
-    public void actualizar(Producto producto) throws SQLException {
-        String sql = "UPDATE producto SET nombre = ?, descripcion = ?, precio = ?, stock = ?, imagen = ? WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, producto.getNombre());
-            ps.setString(2, producto.getDescripcion());
-            ps.setDouble(3, producto.getPrecio());
-            ps.setInt(4, producto.getStock());
-            ps.setString(5, producto.getImagen());
-            ps.setInt(6, producto.getId());
-            ps.executeUpdate();
-        }
-    }
-
     // Eliminar un producto
     public void eliminar(int id) throws SQLException {
         String sql = "DELETE FROM producto WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
