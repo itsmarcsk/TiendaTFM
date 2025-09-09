@@ -32,17 +32,6 @@ public class ImageUploadService {
                 .bodyToMono(String.class)
                 .onErrorResume(e -> Mono.just("No se pudieron obtener las imágenes: " + e.getMessage()));
     }
-   
-    public Mono<String> getVideos() {
-        String endpoint = "/videos/";  // El endpoint para obtener los videos de FastAPI
-
-        return webClientBuilder.build()
-                .get()
-                .uri(FASTAPI_URL + endpoint)
-                .retrieve()
-                .bodyToMono(String.class)
-                .onErrorResume(e -> Mono.just("No se pudieron obtener los videos: " + e.getMessage()));
-    }
     
     public Mono<byte[]> downloadImage(String filename) {
         String endpoint = "/download/image/" + filename;  // El endpoint para descargar la imagen
@@ -52,17 +41,6 @@ public class ImageUploadService {
                 .uri(FASTAPI_URL + endpoint)
                 .retrieve()
                 .bodyToMono(byte[].class)  // Retorna la imagen como un arreglo de bytes
-                .onErrorResume(e -> Mono.empty());  // Retorna vacío si ocurre un error
-    }
-
-    public Mono<byte[]> downloadVideo(String filename) {
-        String endpoint = "/download/video/" + filename;  // El endpoint para descargar el video
-
-        return webClientBuilder.build()
-                .get()
-                .uri(FASTAPI_URL + endpoint)
-                .retrieve()
-                .bodyToMono(byte[].class)  // Retorna el video como un arreglo de bytes
                 .onErrorResume(e -> Mono.empty());  // Retorna vacío si ocurre un error
     }
     
