@@ -12,27 +12,38 @@ import com.tfm.tiendaonline.service.ImageUploadService;
 
 import reactor.core.publisher.Mono;
 
-@RestController
-@RequestMapping("/media")
+@RestController // Marca esta clase como un controlador REST en Spring
+@RequestMapping("/media") // Prefijo para todas las rutas de este controlador
 public class ImageController {
 
     @Autowired
-    private ImageUploadService imageUploadService;
+    private ImageUploadService imageUploadService; // Servicio que gestiona la interacción con la API de imágenes
 
+    // -------------------------------
+    // Endpoint para obtener la lista de imágenes
+    // -------------------------------
     @GetMapping("/imagenes")
     public Mono<String> obtenerImagenes() {
+        // Llama al servicio reactivo para obtener la lista de imágenes
         return imageUploadService.getImages();
     }
 
+    // -------------------------------
+    // Endpoint para descargar una imagen específica por su nombre de archivo
+    // -------------------------------
     @GetMapping("/imagenes/{filename}")
     public Mono<ResponseEntity<byte[]>> getImage(@PathVariable String filename) {
+        // Llama al servicio para descargar la imagen como un arreglo de bytes
         return imageUploadService.downloadImage(filename)
                 .<ResponseEntity<byte[]>>map(imageBytes -> ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, getContentTypeImages(filename.toLowerCase())) // Ajusta el tipo de imagen
-                .body(imageBytes))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+                .header(HttpHeaders.CONTENT_TYPE, getContentTypeImages(filename.toLowerCase())) // Ajusta el tipo MIME según la extensión
+                .body(imageBytes)) // Cuerpo de la respuesta con la imagen
+                .defaultIfEmpty(ResponseEntity.notFound().build()); // Si no se encuentra la imagen, devuelve 404
     }
 
+    // -------------------------------
+    // Método privado para determinar el tipo MIME según la extensión del archivo
+    // -------------------------------
     private String getContentTypeImages(String filename) {
         if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
             return "image/jpeg";
@@ -47,7 +58,7 @@ public class ImageController {
         } else if (filename.endsWith(".tiff") || filename.endsWith(".tif")) {
             return "image/tiff";
         } else {
-            return "application/octet-stream";  // Tipo genérico para archivos binarios
+            return "application/octet-stream";  // Tipo genérico para archivos binarios desconocidos
         }
     }
 

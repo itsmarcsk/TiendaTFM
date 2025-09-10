@@ -3,17 +3,26 @@ package com.tfm.tiendaonline.model;
 import java.sql.Timestamp;
 
 public class Usuario {
-    private int id;
-    private String nombre;
-    private String apellidos;
-    private String email;
-    private String contrasena;
-    private String direccion;
-    private String telefono;
-    private Timestamp fechaRegistro;
+    // -------------------------------
+    // Propiedades del usuario
+    // -------------------------------
+    private int id; // ID único del usuario en la base de datos
+    private String nombre; // Nombre del usuario
+    private String apellidos; // Apellidos del usuario
+    private String email; // Correo electrónico (identificador único)
+    private String contrasena; // Contraseña del usuario (se recomienda almacenar hashed)
+    private String direccion; // Dirección del usuario
+    private String telefono; // Teléfono del usuario
+    private Timestamp fechaRegistro; // Fecha y hora de registro
 
+    // -------------------------------
+    // Constructor vacío (requerido para frameworks o creación inicial de objetos)
+    // -------------------------------
     public Usuario() {}
 
+    // -------------------------------
+    // Constructor privado que recibe un Builder
+    // -------------------------------
     private Usuario(Builder builder) {
         this.id = builder.id;
         this.nombre = builder.nombre;
@@ -25,7 +34,9 @@ public class Usuario {
         this.fechaRegistro = builder.fechaRegistro;
     }
 
+    // -------------------------------
     // Getters
+    // -------------------------------
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public String getApellidos() { return apellidos; }
@@ -35,11 +46,16 @@ public class Usuario {
     public String getTelefono() { return telefono; }
     public Timestamp getFechaRegistro() { return fechaRegistro; }
 
+    // -------------------------------
     // Setters
+    // Solo algunos campos se exponen para modificación directa
+    // -------------------------------
     public void setId(int id) { this.id = id; }
     public void setEmail(String email) { this.email = email; }
 
-    // Builder estático
+    // -------------------------------
+    // Builder estático para facilitar la creación de objetos Usuario
+    // -------------------------------
     public static class Builder {
         private int id;
         private String nombre;
@@ -50,6 +66,7 @@ public class Usuario {
         private String telefono;
         private Timestamp fechaRegistro;
 
+        // Cada método Builder asigna un campo y devuelve el Builder para encadenar llamadas
         public Builder id(int id) { this.id = id; return this; }
         public Builder nombre(String nombre) { this.nombre = nombre; return this; }
         public Builder apellidos(String apellidos) { this.apellidos = apellidos; return this; }
@@ -59,6 +76,7 @@ public class Usuario {
         public Builder telefono(String telefono) { this.telefono = telefono; return this; }
         public Builder fechaRegistro(Timestamp fechaRegistro) { this.fechaRegistro = fechaRegistro; return this; }
 
+        // Método build que crea un objeto Usuario usando el Builder
         public Usuario build() {
             return new Usuario(this);
         }

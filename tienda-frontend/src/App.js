@@ -9,23 +9,16 @@ import Usuario from "./pages/Usuario";
 import Carrito from "./pages/Carrito";
 import CambiarContraseña from "./pages/CambiarContrasena";
 
-
 function App() {
   return (
     <Router>
-
       <Routes>
         {/* Ruta por defecto */}
         <Route path="/" element={<Home />} />
 
-
         {/* Otras páginas */}
-        
         <Route path="/contacto" element={<Contacto />} />
-
         <Route path="/login" element={<Login />} />
-
-        
         <Route path="/registro" element={<Registro />} />
 
         {/* Ruta para productos */}
@@ -37,12 +30,9 @@ function App() {
         {/* Ruta para carrito */}
         <Route path="/carrito" element={<Carrito />} />
 
-        
         {/* Ruta para cambiar contraseña */}
         <Route path="/cambiar-contrasena" element={<CambiarContraseña />} />
-        
       </Routes>
-
     </Router>
   );
 }

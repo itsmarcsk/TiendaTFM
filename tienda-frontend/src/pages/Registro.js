@@ -1,4 +1,3 @@
-// src/pages/Registro.js
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -15,16 +14,18 @@ function Registro() {
     telefono: "",
   });
 
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(""); // Mensajes de estado
 
+  // 🔹 Actualiza el estado con los inputs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // 🔹 Envía los datos al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación final de contraseñas
+    // Validación de contraseñas
     if (formData.contrasena !== formData.confirmarContrasena) {
       setStatus("Las contraseñas no coinciden.");
       return;
@@ -58,7 +59,7 @@ function Registro() {
           telefono: "",
         });
         localStorage.setItem("email", formData.email);
-        window.location.href = "/";
+        window.location.href = "/"; // Redirige al home
       } else {
         setStatus("Error al registrar usuario.");
       }
@@ -108,9 +109,7 @@ function Registro() {
             placeholder="Contraseña"
             value={formData.contrasena}
             onChange={handleChange}
-            style={{
-              borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb",
-            }}
+            style={{ borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb" }}
             required
           />
           <input
@@ -119,16 +118,11 @@ function Registro() {
             placeholder="Repetir contraseña"
             value={formData.confirmarContrasena}
             onChange={handleChange}
-            style={{
-              borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb",
-            }}
+            style={{ borderColor: contrasenasNoCoinciden ? "red" : "#b2dfdb" }}
             required
           />
           {contrasenasNoCoinciden && (
-            <p
-              className="status"
-              style={{ color: "red", fontSize: "0.9rem", marginTop: "0.2rem" }}
-            >
+            <p className="status" style={{ color: "red", fontSize: "0.9rem", marginTop: "0.2rem" }}>
               Las contraseñas no coinciden
             </p>
           )}

@@ -20,7 +20,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # Config SPA: reenvía rutas a index.html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copia TODO el repo del builder y luego mueve lo que exista
+# Copia el repo del builder y luego mueve lo que exista
 COPY --from=build /app /tmp/app
 RUN if [ -d /tmp/app/build ]; then cp -r /tmp/app/build/* /usr/share/nginx/html/; \
     elif [ -d /tmp/app/dist ]; then cp -r /tmp/app/dist/* /usr/share/nginx/html/; \

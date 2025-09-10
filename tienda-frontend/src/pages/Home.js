@@ -1,15 +1,16 @@
-import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../styles/Home.css";
+import React from "react"; // Importa React
+import Header from "../components/Header"; // Componente Header
+import Footer from "../components/Footer"; // Componente Footer
+import "../styles/Home.css"; // Estilos específicos de la página Home
 
 function Home() {
   return (
     <div className="home-container">
+      {/* Header */}
       <Header />
 
       <main className="home">
-        {/* Hero */}
+        {/* Hero: sección principal de bienvenida */}
         <section className="hero">
           <h2>Bienvenido a nuestra tienda de fisioterapia</h2>
           <p>
@@ -17,7 +18,7 @@ function Home() {
           </p>
         </section>
 
-        {/* Beneficios */}
+        {/* Beneficios de los productos */}
         <section className="features">
           <h3>Beneficios de nuestros productos</h3>
           <div className="feature-cards">
@@ -36,7 +37,7 @@ function Home() {
           </div>
         </section>
 
-        {/* Cómo funciona */}
+        {/* Cómo funciona la tienda */}
         <section className="how-it-works">
           <h3>Cómo Funciona</h3>
           <p>
@@ -44,7 +45,7 @@ function Home() {
           </p>
         </section>
 
-        {/* Testimonios */}
+        {/* Testimonios de clientes */}
         <section className="testimonials">
           <h3>Lo que dicen nuestros clientes</h3>
           <div className="testimonial-cards">
@@ -63,7 +64,7 @@ function Home() {
           </div>
         </section>
 
-        {/* Call to Action */}
+        {/* Call to Action: invitación a visitar la tienda */}
         <section className="cta">
           <h3>Descubre todos nuestros productos</h3>
           <p>Visita nuestra tienda y encuentra todo lo que necesitas para tu bienestar físico.</p>
@@ -71,6 +72,7 @@ function Home() {
         </section>
       </main>
 
+      {/* Footer */}
       <Footer />
     </div>
   );
